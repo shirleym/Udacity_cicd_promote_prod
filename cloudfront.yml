@@ -29,7 +29,7 @@ Resources:
           ViewerProtocolPolicy: allow-all
 
 Outputs:
-  PipelineID_Cfront:
+  PipelineIDCfront:
     Value: !Sub ${PipelineID}
     Export:
-      Name: PipelineID
+      Name: PipelineIDCfront
