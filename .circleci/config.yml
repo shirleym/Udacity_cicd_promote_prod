@@ -30,6 +30,7 @@ jobs:
     steps:
       - checkout
       - run: yum install -y tar
+      - run: yum install -y gzip
       - run: |
           aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
