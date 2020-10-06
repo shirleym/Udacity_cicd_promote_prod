@@ -38,7 +38,6 @@ jobs:
           paths:
             - output.txt
 
-
   clean_up_old_front_end:
     docker:
       - image: amazon/aws-cli
@@ -61,6 +60,13 @@ workflows:
   my_workflow:
     jobs:
       - create_and_deploy_front_end
+      - get_last_deployment_id:
+          requires:
+            - create_and_deploy_front_end
       - promote_to_production:
           requires:
             - create_and_deploy_front_end
+      - clean_up_old_front_end:
+          requires:
+            - create_and_deploy_front_end
+            - get_last_deployment_id
