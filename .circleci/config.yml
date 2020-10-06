@@ -41,16 +41,13 @@ jobs:
   clean_up_old_front_end:
     docker:
       - image: amazon/aws-cli
-    parameters:
-      OldPipelineID:
-        type: string
     steps:
       - checkout
       - attach_workspace:
           at: ~/
       - run: $OldPipelineID = cat ~/output.txt
       - run: |
-          aws s3 rm "s3://${OldPipelineID}" --recursiv
+          aws s3 rm "s3://${OldPipelineID}" --recursive
       - run: |
           aws cloudformation delete-stack --stack-name "${OldPipelineID}"
 
