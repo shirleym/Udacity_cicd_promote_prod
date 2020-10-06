@@ -45,6 +45,8 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run: yum install -y tar
+      - run: yum install -y gzip
       - attach_workspace:
           at: ~/
       - run: $OldPipelineID = cat ~/output.txt
@@ -67,5 +69,5 @@ workflows:
             - create_and_deploy_front_end
       - clean_up_old_front_end:
           requires:
-            - create_and_deploy_front_end
             - get_last_deployment_id
+            - promote_to_production
