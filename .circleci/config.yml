@@ -29,6 +29,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run: yum install -y tar
       - run: |
           aws cloudformation \
             list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
